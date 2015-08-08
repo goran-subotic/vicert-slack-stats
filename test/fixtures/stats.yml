@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  msg_count: 1
+  msg_count_last_seven_days: 1
+
+two:
+  name: MyString
+  msg_count: 1
+  msg_count_last_seven_days: 1

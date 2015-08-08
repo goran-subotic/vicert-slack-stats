@@ -1,0 +1,31 @@
+<div class="row">
+<h3>Top 10 - Last 7 days</h3>
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>User</th>
+    <th>Message Count</th>
+  </tr>
+<% @stats_all_time.each do |stat| %>
+    <tr>
+      <td><%= stat.name %></td>
+      <td><%= stat.msg_count_last_seven_days %></td>
+    </tr>
+<% end %>
+</table>
+
+
+
+<h3>Top 10 - All Time</h3>
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>User</th>
+    <th>Message Count</th>
+  </tr>
+  <% @stats_last_seven_days.each do |stat| %>
+      <tr>
+        <td><%= stat.name %></td>
+        <td><%= stat.msg_count %></td>
+      </tr>
+  <% end %>
+</table>
+</div>
