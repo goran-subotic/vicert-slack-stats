@@ -40,5 +40,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   
-  config.x.slack_key = 'add slack key' #add slack key
+  config.x.slack_key = 'add slack key' #add slack auth key 
 end
