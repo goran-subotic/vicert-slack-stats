@@ -10,6 +10,7 @@ Rails.application.routes.draw do
    
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -41,4 +41,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   config.x.slack_key = 'add slack key' #add slack auth key 
+  
+  config.x.slack_users_uri = 'https://slack.com/api/users.list'
+  
+  config.x.slack_search_all_uri = 'https://slack.com/api/search.all'
 end

@@ -1,14 +1,22 @@
 require 'rubygems'
 require 'rufus/scheduler'
-require 'net/http'
+require 'slack/slack_data'
 
 ## to start scheduler
 scheduler = Rufus::Scheduler.new
 
-## It will print message every i sec
-scheduler.every("1m") do
-  SlackWorker.perform_async('Sloba')
+## It will print message every 55 min
+scheduler.every("55m") do
+  #SlackWorker.perform_async('Sloba')
+  Delayed::Job.enqueue SlackData::CollectSlackUsersJob.new("slack_users")
 end
+
+scheduler.every("10m") do
+  #SlackWorker.perform_async('Sloba')
+  Delayed::Job.enqueue SlackData::CollectSlackMessagesJob.new("slack_messages")
+end
+
+
 
 ## Prints the message every day at noon
 # scheduler.cron("0,2 * * * *") do

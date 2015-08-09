@@ -78,4 +78,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   config.x.slack_key = 'add slack key' #add slack key
+  
+  config.x.slack_users_uri = 'https://slack.com/api/users.list'
+  
+  config.x.slack_search_all_uri = 'https://slack.com/api/search.all'
 end

@@ -38,6 +38,9 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  
+  gem 'rspec-sidekiq'
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -49,7 +52,12 @@ gem 'autoprefixer-rails'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+#gem 'redis-semaphore'
 
 gem 'rufus-scheduler'
 
 gem 'devise'
+
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'

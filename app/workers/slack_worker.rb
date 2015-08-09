@@ -1,9 +1,13 @@
 class SlackWorker
   include Sidekiq::Worker
+  sidekiq_options :queue => :slack
+  sidekiq_options :retry => 2
+  sidekiq_options :expires_in => 1.hour
 
   def perform(name)
-    uriUsers = URI('https://slack.com/api/users.list')
-    uriMessages = URI('https://slack.com/api/search.all')
+    
+    uriUsers = URI(Rails.configuration.x.slack_users_uri)
+    uriMessages = URI(Rails.configuration.x.slack_search_all_uri)
     params = { :token => Rails.configuration.x.slack_key}
     uriUsers.query = URI.encode_www_form(params)
 
@@ -11,8 +15,9 @@ class SlackWorker
       request = Net::HTTP::Get.new uriUsers
 
       response = httpUsers.request request
-    
       data = JSON.parse(response.body)
+      
+      
       data['members'].each do |member|
         if !(Stat.where(:name => member['name']).exists?)
           Stat.create(:name=> member['name'])
@@ -28,6 +33,9 @@ class SlackWorker
           Stat.where(:name => member['name']).update_all(:msg_count => dataUser['messages']["total"], :msg_count_last_seven_days => dataUser['messages']["total"])
         end
       end
+        
     end
   end
+  
+  
 end
