@@ -6,7 +6,6 @@ class StatController < ApplicationController
     @stats_all_time = Stat.paginate(:page => params[:page], :per_page => 10).order("msg_count DESC")
 
     #@stats_all_time = Stat.order("msg_count DESC").first(10)
-    #@stats_last_seven_days = Stat.order("msg_count_last_seven_days DESC").first(10)
 
   end
   

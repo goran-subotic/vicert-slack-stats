@@ -31,7 +31,7 @@ class SlackWorker
           response = httpMsg.request request
     
           dataUser = JSON.parse(response.body)
-          Stat.where(:name => member['name']).update_all(:msg_count => dataUser['messages']["total"], :msg_count_last_seven_days => dataUser['messages']["total"])
+          Stat.where(:name => member['name']).update_all(:msg_count => dataUser['messages']["total"])
         end
       end
         

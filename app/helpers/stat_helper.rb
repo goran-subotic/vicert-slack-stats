@@ -45,7 +45,7 @@ module StatHelper
   def self.update_messages(name, count)
     #Delayed::Worker.logger.info(name)
     #Delayed::Worker.logger.info(count)
-    Stat.where(:name => name).update_all(:msg_count => count, :msg_count_last_seven_days => count)
+    Stat.where(:name => name).update_all(:msg_count => count)
   end
   
   
