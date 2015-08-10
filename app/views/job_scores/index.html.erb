@@ -6,8 +6,9 @@
   <thead>
     <tr>
       <th>Job</th>
-      <th>Start time</th>
-      <th>End time</th>
+      <th>Start Time</th>
+      <th>Duration (sec)</th>
+      <th>Status</th>
       <th colspan="3">Action</th>
     </tr>
   </thead>
@@ -17,14 +18,25 @@
       <tr>
         <td><%= job_score.name %></td>
         <td><%= job_score.start_time %></td>
-        <td><%= job_score.end_time %></td>
+        <td> <% if job_score.end_time.present? %>
+        		<%= job_score.end_time - job_score.start_time %>
+        	<% else %>
+				<%= Time.now - job_score.start_time %>
+			<% end %>	        	
+        </td>
+        <td> <% if job_score.end_time.present? %>
+        		<%= job_score.status %>
+        	<% else %>
+				In Progress
+			<% end %>	        	
+        </td>
         <td><%= link_to 'Show', job_score %></td>
         <td><%= link_to 'Edit', edit_job_score_path(job_score) %></td>
         <td><%= link_to 'Destroy', job_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <tr>
-	   <td colspan="6"><%= will_paginate @job_scores %></td>
+	   <td colspan="7"><%= will_paginate @job_scores %></td>
 	</tr>
   </tbody>
 </table>

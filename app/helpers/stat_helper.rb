@@ -17,7 +17,7 @@ module StatHelper
   def self.insert_users(users)
     users.each do |member|
       if !(Stat.where(:name => member['name']).exists?)
-        Stat.create(:name=> member['name'])
+        Stat.create(:name=> member['name'], :full_name => member['profile']['real_name'])
       end
     end
   end
