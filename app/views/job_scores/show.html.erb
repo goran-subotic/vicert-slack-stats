@@ -2,7 +2,7 @@
 
 <p>
   <strong>Job:</strong>
-  <%= @job_score.job %>
+  <%= @job_score.name %>
 </p>
 
 <p>
@@ -13,6 +13,11 @@
 <p>
   <strong>End time:</strong>
   <%= @job_score.end_time %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @job_score.end_time - @job_score.start_time %> sec
 </p>
 
 <%= link_to 'Edit', edit_job_score_path(@job_score) %> |
