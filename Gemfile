@@ -52,6 +52,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
 gem 'sidekiq'
+gem 'sidekiq-unique-jobs'
 gem 'sinatra', require: false
 gem 'slim'
 #gem 'redis-semaphore'
