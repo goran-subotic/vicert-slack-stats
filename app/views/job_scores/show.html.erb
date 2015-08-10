@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @job_score.job %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @job_score.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @job_score.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_job_score_path(@job_score) %> |
+<%= link_to 'Back', job_scores_path %>
