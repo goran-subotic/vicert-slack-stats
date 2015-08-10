@@ -34,8 +34,9 @@ module SlackData
     end
     
     def enqueue(job)
-      js = JobScore.find_or_initialize_by(job_id: job.primary_key)
-      js.update(job_id: job.primary_key , name: job.handler, start_time: Time.now)
+      job.save!
+      js = JobScore.find_or_initialize_by(job_id: job.id)
+      js.update(job_id: job.id, name: job.handler, start_time: Time.now)
     end
     
     def success(job)
