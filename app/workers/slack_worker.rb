@@ -3,6 +3,7 @@ class SlackWorker
   sidekiq_options :queue => :slack
   sidekiq_options :retry => 2
   sidekiq_options :expires_in => 1.hour
+  sidekiq_options unique: true
 
   def perform(name)
     

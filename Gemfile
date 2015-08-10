@@ -32,13 +32,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  
+end
+
+group :test do
   gem 'rspec-sidekiq'
   gem 'rspec-rails'
 end
@@ -50,6 +52,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
 gem 'sidekiq'
+gem 'sidekiq-unique-jobs'
 gem 'sinatra', require: false
 gem 'slim'
 #gem 'redis-semaphore'
