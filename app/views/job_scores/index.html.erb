@@ -1,21 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Job Scores</h1>
+<h3>Listing Job Scores</h3>
 
-<table>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>Job</th>
       <th>Start time</th>
       <th>End time</th>
-      <th colspan="3"></th>
+      <th colspan="3">Action</th>
     </tr>
   </thead>
 
   <tbody>
     <% @job_scores.each do |job_score| %>
       <tr>
-        <td><%= job_score.job %></td>
+        <td><%= job_score.name %></td>
         <td><%= job_score.start_time %></td>
         <td><%= job_score.end_time %></td>
         <td><%= link_to 'Show', job_score %></td>
@@ -23,6 +23,9 @@
         <td><%= link_to 'Destroy', job_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <tr>
+	   <td colspan="6"><%= will_paginate @job_scores %></td>
+	</tr>
   </tbody>
 </table>
 

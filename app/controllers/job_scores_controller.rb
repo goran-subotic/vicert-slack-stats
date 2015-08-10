@@ -4,7 +4,8 @@ class JobScoresController < ApplicationController
   # GET /job_scores
   # GET /job_scores.json
   def index
-    @job_scores = JobScore.all
+    #@job_scores = JobScore.all
+    @job_scores = JobScore.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /job_scores/1
