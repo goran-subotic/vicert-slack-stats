@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Job Scores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_scores.each do |job_score| %>
+      <tr>
+        <td><%= job_score.job %></td>
+        <td><%= job_score.start_time %></td>
+        <td><%= job_score.end_time %></td>
+        <td><%= link_to 'Show', job_score %></td>
+        <td><%= link_to 'Edit', edit_job_score_path(job_score) %></td>
+        <td><%= link_to 'Destroy', job_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job score', new_job_score_path %>

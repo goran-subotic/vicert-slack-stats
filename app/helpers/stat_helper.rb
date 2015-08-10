@@ -48,4 +48,5 @@ module StatHelper
     Stat.where(:name => name).update_all(:msg_count => count, :msg_count_last_seven_days => count)
   end
   
+  
 end
