@@ -57,6 +57,8 @@ gem 'sinatra', require: false
 gem 'slim'
 #gem 'redis-semaphore'
 
+gem 'will_paginate'
+
 gem 'rufus-scheduler'
 
 gem 'devise'
