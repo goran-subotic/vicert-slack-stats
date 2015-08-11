@@ -57,7 +57,7 @@ For Sidekiq worker to start, execute: <tt>bundle exec sidekiq</tt>
 * Deployment instructions
 	Execute <tt>rails s</tt> to start the application.
 	
-Following are inportant URLs:
+Following are important URLs:
  - localhost:3000 - Page with users and number of messages can be seen here
  - localhost:3000/sidekiq - Sidekiq queuq status
  - localhost:3000/delayed_job/overview - DelayedJob status
