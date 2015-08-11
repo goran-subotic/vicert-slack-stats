@@ -20,7 +20,7 @@ First, it is necessary to configure the Slack token by filling:
 
 In order to set up which job to be executed (Sidekiq or DejayedJob) and time of execution it is necessary to update /config/initializers/task_scheduler.rb file:
 
-Example where DelayedJob is active
+Example where DelayedJob is active:
 
 
     #It will execute the task every 55 min
