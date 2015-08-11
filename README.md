@@ -10,20 +10,23 @@ Application is colecting the data througth scheduled tasks. There are two implem
 * Ruby v2.1.5
 * Rails v4.2.3
  
-* System dependencies
+###System dependencies
 
 In order to execute Sidekiq job, it is necesary to have Redis running on localhost:6379.
 
 * Configuration
 First, it is necessary to configure the Slack token by filling: 
-<tt>config.x.slack_key</tt> property for desired environment  ( development.rb, in production.rb or test.rb)
+```
+config.x.slack_key
+```
+property for desired environment  ( development.rb, in production.rb or test.rb)
 
 
 In order to set up which job to be executed (Sidekiq or DejayedJob) and time of execution it is necessary to update /config/initializers/task_scheduler.rb file:
 
 Example where DelayedJob is active:
 
-
+```ruby
     #It will execute the task every 55 min
     scheduler.every("55s") do
       Delayed::Job.enqueue SlackData::CollectSlackUsersJob.new("slack_users")
@@ -32,15 +35,16 @@ Example where DelayedJob is active:
     scheduler.every("50s") do
       Delayed::Job.enqueue SlackData::CollectSlackMessagesJob.new("slack_messages")
     end
-
+```
 
 Example where Sidekiq is active:
 
+```ruby
     #It will execute task every 55 min
     scheduler.every("55s") do
       SlackWorker.perform_async(:slack)
     end
-
+```
 
 
 
