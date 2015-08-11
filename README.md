@@ -1,7 +1,7 @@
 #Slack Statistics
 
-The purpose of this application is to colect users and number of messages for each user from Slack. The data is displayed in application home page. 
-Application is colecting the data througth scheduled tasks. There are two implementation of the jobs:
+The purpose of this application is to colect users and number of messages for each user from Slack. The data is displayed on the application home page. 
+Application is colecting the data through scheduled tasks. There are two implementation of the jobs:
  - Sidekiq
  - Delayed Job
 
@@ -16,16 +16,14 @@ In order to execute Sidekiq job, it is necesary to have Redis running on localho
 
 ###Configuration
 
-First, it is necessary to configure the Slack token by filling: 
+First, it is necessary to configure the Slack token by setting the following property for desired environment within the appropriate config file ( development.rb, production.rb or test.rb): 
 ```
 config.x.slack_key
 ```
-property for desired environment  ( development.rb, in production.rb or test.rb)
 
+In order to set up which job (Sidekiq or DejayedJob) should be executed and the time of its execution it is necessary to update the /config/initializers/task_scheduler.rb file:
 
-In order to set up which job to be executed (Sidekiq or DejayedJob) and time of execution it is necessary to update /config/initializers/task_scheduler.rb file:
-
-Example where DelayedJob is active:
+An example where DelayedJob is active:
 
 ```ruby
 #It will execute the task every 55 min
@@ -38,7 +36,7 @@ scheduler.every("50s") do
 end
 ```
 
-Example where Sidekiq is active:
+An example where Sidekiq is active:
 
 ```ruby
 #It will execute task every 55 min
@@ -56,29 +54,27 @@ end
 	
 The application is using sqlite database.
 
-Execute 
+Execute the following command to set up the database:
 
 ```
 > rake db:migrate RAILS_ENV=<env>
 ```
-to setup the database.
-	
 
 ###Deployment instructions
 
-To simply start the application, execute:
+To start the application, execute the following command:
 
 ```
 > rails s
 ```
 
-For DelayedJob worker to start, execute: 
+For the DelayedJob worker to start, execute: 
 
 ```
 > rake jobs:work
 ```
 
-For Sidekiq worker to start, execute: 
+For the Sidekiq worker to start, execute: 
 
 ```
 > bundle exec sidekiq
@@ -92,7 +88,7 @@ To execute tests, run:
 bundle exec rspec
 ```
 
-We have used FactoryGirl (with Faker) for mocking models. And to mock external API calls to Slack, we utilized WebMock gem.
+We have used FactoryGirl (with Faker) for mocking models. To mock external API calls to Slack, we utilized the WebMock gem.
 
 
 ### Application URLs
@@ -100,7 +96,7 @@ We have used FactoryGirl (with Faker) for mocking models. And to mock external A
 Following are important URLs:
 
 
- - localhost:3000 - Page with users and number of messages can be seen here
+ - localhost:3000 - Page with users and number of messages
  - localhost:3000/sidekiq - Sidekiq queue status
  - localhost:3000/delayed_job/overview - DelayedJob status
- - localhost:3000/job_scores - DelayedJob jobs statistics are displayed on this page
+ - localhost:3000/job_scores - DelayedJob jobs statistics
