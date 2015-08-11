@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe "job_scores/show", type: :view do
   before(:each) do
     @job_score = assign(:job_score, JobScore.create!(
-      :job => "Job"
+        :job_id => 1,
+        :name => "Job",
+        :start_time => Time.now,
+        :end_time => Time.now,
+        :status => "success"
     ))
   end
 
