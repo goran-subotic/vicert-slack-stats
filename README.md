@@ -66,7 +66,7 @@ to setup the database.
 
 ###Deployment instructions
 
-To simply start the application execute:
+To simply start the application, execute:
 
 ```
 > rails s
@@ -83,6 +83,16 @@ For Sidekiq worker to start, execute:
 ```
 > bundle exec sidekiq
 ```
+
+###Rspec tests
+
+To execute tests, run:
+
+```
+bundle exec rspec
+```
+
+We have used FactoryGirl (with Faker) for mocking models. And to mock external API calls to Slack, we utilized WebMock gem.
 
 
 ### Application URLs
