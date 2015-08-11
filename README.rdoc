@@ -1,6 +1,6 @@
 == Slack Statistics
 
-The purpose of this application is to colect users and nomber of messages for each user from Slack. The data is displayed in application home page. 
+The purpose of this application is to colect users and number of messages for each user from Slack. The data is displayed in application home page. 
 Application is colecting the data througth scheduled tasks. There are two implementation of the jobs:
  - Sidekiq
  - Delayed Job
