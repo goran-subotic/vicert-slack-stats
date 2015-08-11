@@ -25,13 +25,13 @@ RSpec.describe StatController, type: :controller do
   describe "GET #index" do
     it "lists a list of top users" do
 
-      per_page = 2
+      per_page = 5
 
       user_list = Array.new
-
-      user_list.push(Stat.create(name: "Rspec Test User 1", msg_count: 10))
-      user_list.push(Stat.create(name: "Rspec Test User 2", msg_count: 20))
-      user_list.push(Stat.create(name: "Rspec Test User 3", msg_count: 15))
+      
+      per_page.times do
+        user_list.push(FactoryGirl.create(:stat))
+      end
 
       #Sort the array and return first per_page values
       user_list = user_list.sort_by {|stat| -stat.msg_count}[0 .. per_page-1]
