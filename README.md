@@ -49,18 +49,7 @@ Example where Sidekiq is active:
 
 
 
-For DelayedJob worker to start, execute: 
 
-```
-> rake jobs:work
-```
-in console
-
-For Sidekiq worker to start, execute: 
-
-```
-> bundle exec sidekiq
-```
 
 
 ###Database creation
@@ -77,12 +66,23 @@ to setup the database.
 
 ###Deployment instructions
 
-Execute 
+To simply start the application execute:
 
 ```
 > rails s
 ```
-to start the application.
+
+For DelayedJob worker to start, execute: 
+
+```
+> rake jobs:work
+```
+
+For Sidekiq worker to start, execute: 
+
+```
+> bundle exec sidekiq
+```
 
 
 ### Application URLs
