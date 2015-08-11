@@ -44,7 +44,9 @@ group :test do
   gem 'byebug'
   gem 'rspec-sidekiq'
   gem 'rspec-rails'
+
   gem 'webmock'
+  gem 'factory_girl_rails'
 end
 
 
