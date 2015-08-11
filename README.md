@@ -28,23 +28,23 @@ In order to set up which job to be executed (Sidekiq or DejayedJob) and time of 
 Example where DelayedJob is active:
 
 ```ruby
-    #It will execute the task every 55 min
-    scheduler.every("55s") do
-      Delayed::Job.enqueue SlackData::CollectSlackUsersJob.new("slack_users")
-    end
+#It will execute the task every 55 min
+scheduler.every("55s") do
+  Delayed::Job.enqueue SlackData::CollectSlackUsersJob.new("slack_users")
+end
 
-    scheduler.every("50s") do
-      Delayed::Job.enqueue SlackData::CollectSlackMessagesJob.new("slack_messages")
-    end
+scheduler.every("50s") do
+  Delayed::Job.enqueue SlackData::CollectSlackMessagesJob.new("slack_messages")
+end
 ```
 
 Example where Sidekiq is active:
 
 ```ruby
-    #It will execute task every 55 min
-    scheduler.every("55s") do
-      SlackWorker.perform_async(:slack)
-    end
+#It will execute task every 55 min
+scheduler.every("55s") do
+  SlackWorker.perform_async(:slack)
+end
 ```
 
 
