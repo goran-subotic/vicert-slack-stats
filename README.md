@@ -101,6 +101,6 @@ Following are important URLs:
 
 
  - localhost:3000 - Page with users and number of messages can be seen here
- - localhost:3000/sidekiq - Sidekiq queuq status
+ - localhost:3000/sidekiq - Sidekiq queue status
  - localhost:3000/delayed_job/overview - DelayedJob status
  - localhost:3000/job_scores - DelayedJob jobs statistics are displayed on this page
