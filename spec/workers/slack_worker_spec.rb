@@ -10,11 +10,11 @@ describe SlackWorker do
     it { is_expected.to be_expired_in 3600 }
     
   
-    it 'enqueues SlackWorker job' do
-      SlackWorker.perform_async('SlackWorker')
-  
-      expect(SlackWorker).to have_enqueued_job('SlackWorker')
-    end
+    # it 'enqueues SlackWorker job' do
+      # SlackWorker.perform_async('SlackWorker')
+#   
+      # expect(SlackWorker).to have_enqueued_job('SlackWorker')
+    # end
   end
   
   
