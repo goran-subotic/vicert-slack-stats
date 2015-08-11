@@ -1,23 +1,6 @@
 require 'rails_helper'
-#require 'stat_helper'
 
-# Specs in this file have access to a helper object that includes
-# the StatHelper. For example:
-#
-# describe StatHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe StatHelper, type: :helper do
-
-  # before(:each) do
-  #   stub_request(:get, /https:\/\/slack.com\/api\/search.all/).
-  #       with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-  #       to_return(status: 200, body: "stubbed response", headers: {})
-  # end
 
   before(:each) do
 

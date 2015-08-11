@@ -1,15 +1,17 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the JobScoresHelper. For example:
-#
-# describe JobScoresHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe JobScoresHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+
+  describe "#update_job_status" do
+    it "updates status of a job" do
+
+      job_score = JobScore.create(name: "Rspec Test Job", status: "started")
+      JobScoresHelper::update_job_status(job_score.job_id, "success")
+      job_score.reload()
+      expect(job_score.status).to eq("success")
+
+    end
+  end
+
 end
