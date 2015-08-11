@@ -7,7 +7,8 @@ Application is colecting the data througth scheduled tasks. There are two implem
 
 
 
-* Ruby version 2.1.5
+* Ruby v2.1.5
+* Rails v4.2.3
  
 * System dependencies
 
