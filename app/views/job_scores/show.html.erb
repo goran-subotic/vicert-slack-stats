@@ -1,29 +1,45 @@
+<div class="row">
+<h3>Slack Jobs Statistics</h3>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Job:</strong>
-  <%= @job_score.name %>
-</p>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @job_score.start_time %>
-</p>
+	<table class="table table-striped table-bordered">
+		<tr>
+			<td><strong>Job:</strong></td>
+			<td><%= @job_score.name %></td>
+		</tr>
+		<tr>
+			<td><strong>Start time:</strong></td>
+			<td><%= @job_score.start_time %></td>
+		</tr>
+		<tr>
+			<td><strong>End time:</strong></td>
+			<td><%= @job_score.end_time %></td>
+		</tr>
+		<tr>
+			<td><strong>Duration:</strong></td>
+			<td>
+				<% if @job_score.end_time.present? %>
+					<%= @job_score.end_time - @job_score.start_time %>
+			  <% else %>
+					<%= Time.now - @job_score.start_time %>
+			  <% end %>	sec
+			</td>
+		</tr>
+		<tr>
+			<td><strong>Status:</strong></td>
+				<td>
+					<% if @job_score.end_time.present? %>
+						<%= @job_score.status %>
+				  <% else %>
+						In Progress
+					<% end %>
+				</td>
+		</tr>
+		<tr>
+			<td colspan="2"><%= link_to 'Back', job_scores_path %></td>
+		</tr>
+	</table>
 
-<p>
-  <strong>End time:</strong>
-  <%= @job_score.end_time %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @job_score.end_time - @job_score.start_time %> sec
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @job_score.status %>
-</p>
-
-<%= link_to 'Edit', edit_job_score_path(@job_score) %> |
-<%= link_to 'Back', job_scores_path %>
+</div>
