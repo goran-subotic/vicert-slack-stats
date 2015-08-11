@@ -31,16 +31,14 @@
 			<% end %>	        	
         </td>
         <td><%= link_to 'Show', job_score %></td>
-        <td><%= link_to 'Edit', edit_job_score_path(job_score) %></td>
         <td><%= link_to 'Destroy', job_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <tr>
-	   <td colspan="7"><%= will_paginate @job_scores %></td>
+	   <td colspan="6"><%= will_paginate @job_scores %></td>
 	</tr>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Job score', new_job_score_path %>
