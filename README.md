@@ -1,4 +1,4 @@
-== Slack Statistics
+#Slack Statistics
 
 The purpose of this application is to colect users and number of messages for each user from Slack. The data is displayed in application home page. 
 Application is colecting the data througth scheduled tasks. There are two implementation of the jobs:
@@ -48,21 +48,40 @@ Example where Sidekiq is active:
 
 
 
-For DelayedJob worker to start, execute: <tt>rake jobs:work</tt> in console
+For DelayedJob worker to start, execute: 
 
-For Sidekiq worker to start, execute: <tt>bundle exec sidekiq</tt>
+```
+> rake jobs:work
+```
+in console
+
+For Sidekiq worker to start, execute: 
+
+```
+> bundle exec sidekiq
+```
 
 
 * Database creation
 	
 	The application is using sqlite database.
-	Execute <tt>rake db:migrate RAILS_ENV=<env></tt> to setup the database.
+	Execute 
+```
+> rake db:migrate RAILS_ENV=<env>
+```
+to setup the database.
 	
 
 * Deployment instructions
-	Execute <tt>rails s</tt> to start the application.
+	Execute 
+```
+> rails s
+```
+to start the application.
 	
 Following are important URLs:
+
+
  - localhost:3000 - Page with users and number of messages can be seen here
  - localhost:3000/sidekiq - Sidekiq queuq status
  - localhost:3000/delayed_job/overview - DelayedJob status
