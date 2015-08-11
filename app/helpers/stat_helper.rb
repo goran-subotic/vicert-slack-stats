@@ -1,6 +1,7 @@
 module StatHelper
   
- 
+  #retrieves user from Slack
+  #returns JSON that caontains all slack users 
   def self.fetch_users_from_slack
     uriUsers = URI(Rails.configuration.x.slack_users_uri)
     params = { :token => Rails.configuration.x.slack_key}
@@ -14,6 +15,7 @@ module StatHelper
     end
   end
   
+  #iterate through JSON with users and stores them into database (Stat table)
   def self.insert_users(users)
     users.each do |member|
       if !(Stat.where(:name => member['name']).exists?)
@@ -22,6 +24,8 @@ module StatHelper
     end
   end
   
+  #For each record in the Stat table retrieves messages from Slack (using username) 
+  #After Slack response, number of messages is updated for that Stat record
   def self.update_users_messages
     Stat.all.each do |member|
       messages = fetch_messages_for_user(member.name)
@@ -29,6 +33,7 @@ module StatHelper
     end
   end
   
+  #Retrieves messages for specific Slack user using the Slack API
   def self.fetch_messages_for_user(user)
     uriMessages = URI(Rails.configuration.x.slack_search_all_uri)
     params = { :token => Rails.configuration.x.slack_key, :query => 'from:' + user}
@@ -42,6 +47,7 @@ module StatHelper
     end
   end
   
+  #Updates specific Stat record with new number of messages 
   def self.update_messages(name, count)
     #Delayed::Worker.logger.info(name)
     #Delayed::Worker.logger.info(count)

@@ -5,8 +5,8 @@ class SlackWorker
   sidekiq_options :expires_in => 1.hour
   sidekiq_options unique: true
 
+  #Sidekiq job for fetching users and number of messages for each user
   def perform(name)
-    
     users = StatHelper::fetch_users_from_slack
     StatHelper::insert_users(users)
     StatHelper::update_users_messages
