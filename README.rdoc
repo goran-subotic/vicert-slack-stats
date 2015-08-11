@@ -1,7 +1,9 @@
-== README
+The purpose of this application is to colect users and nomber of messages for each user from Slack. The data is displayed in application home page. 
+Application is colecting the data througth scheduled tasks. There are two implementation of the jobs:
+ - Sidekiq
+ - Delayed Job
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ 
 
 Things you may want to cover:
 
@@ -9,20 +11,58 @@ Things you may want to cover:
 
 * System dependencies
 
+In order to execute Sidekiq job, it is necesary to have Redis running on localhost:6379.
+
 * Configuration
+First, it is necessary to configure the Slack token by filling: 
+<tt>config.x.slack_key</tt> property for desired environment  ( development.rb, in production.rb or test.rb)
+
+
+In order to set up which job to be executed (Sidekiq or DejayedJob) and time of execution it is necessary to update /config/initializers/task_scheduler.rb file:
+
+Example where DelayedJob is active
+<tt>
+ # It will execute the task every 55 min
+ scheduler.every("55s") do
+  Delayed::Job.enqueue SlackData::CollectSlackUsersJob.new("slack_users")
+ end
+
+ scheduler.every("50s") do
+   Delayed::Job.enqueue SlackData::CollectSlackMessagesJob.new("slack_messages")
+ end
+</tt>
+
+Example where Sidekiq is active:
+<tt>
+ # It will execute task every 55 min
+scheduler.every("55s") do
+  #SlackWorker.perform_async(:slack)
+end
+
+</tt>
+
+
+For DelayedJob worker to start, execute: <tt>rake jobs:work</tt> in console
+
+For Sidekiq worker to start, execute: <tt>bundle exec sidekiq</tt>
+
 
 * Database creation
-
-* Database initialization
+	
+	The application is using sqlite database.
+	Execute <tt>rake db:migrate RAILS_ENV=<env></tt> to setup the database.
+	
+* Database initialization	
 
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+	Execute <tt>rails s</tt> to start the application.
+	
+Following are inportant URLs:
+ - localhost:3000 - Page with users and number of messages can be seen here
+ - localhost:3000/sidekiq - Sidekiq queuq status
+ - localhost:3000/delayed_job/overview - DelayedJob status
+ - localhost:3000/job_scores - DelayedJob jobs statistics are displayed on this page
