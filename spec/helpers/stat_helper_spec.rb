@@ -13,8 +13,24 @@ require 'rails_helper'
 # end
 RSpec.describe StatHelper, type: :helper do
 
+  # before(:each) do
+  #   stub_request(:get, /https:\/\/slack.com\/api\/search.all/).
+  #       with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+  #       to_return(status: 200, body: "stubbed response", headers: {})
+  # end
+
+  before(:each) do
+
+    mock_response = File.join(Rails.root, 'spec', 'webmock', 'slack_com_api_search_all.json')
+    mr = File.open(mock_response)
+
+    stub_request(:get, Regexp.new(Regexp.escape(Rails.configuration.x.slack_search_all_uri))).
+        with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(status: 200, body: mr, headers: {})
+  end
+
   describe "#insert_users" do
-     it "persists a list of stats" do
+     it "persists a list of user data into stats table" do
 
        member1 = {"name" => :rspec_test_user_1, "profile" => { "real_name" => "Rspec Test User One"}}
        member2 = {"name" => :rspec_test_user_2, "profile" => { "real_name" => "Rspec Test User Two"}}
@@ -28,6 +44,15 @@ RSpec.describe StatHelper, type: :helper do
        expect(stat_2).to_not be_nil
 
      end
-   end
+  end
+
+  describe "#fetch_messages_for_user" do
+    it "fetches collection of Slack messages for user" do
+      result = StatHelper::fetch_messages_for_user("rspec_test_user_1")
+
+      expect(result).to_not be_nil
+
+    end
+  end
 
 end
