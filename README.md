@@ -6,15 +6,16 @@ Application is colecting the data througth scheduled tasks. There are two implem
  - Delayed Job
 
 
+###System dependencies
 
 * Ruby v2.1.5
 * Rails v4.2.3
- 
-###System dependencies
+* Redis
 
 In order to execute Sidekiq job, it is necesary to have Redis running on localhost:6379.
 
-* Configuration
+###Configuration
+
 First, it is necessary to configure the Slack token by filling: 
 ```
 config.x.slack_key
@@ -62,23 +63,30 @@ For Sidekiq worker to start, execute:
 ```
 
 
-* Database creation
+###Database creation
 	
-	The application is using sqlite database.
-	Execute 
+The application is using sqlite database.
+
+Execute 
+
 ```
 > rake db:migrate RAILS_ENV=<env>
 ```
 to setup the database.
 	
 
-* Deployment instructions
-	Execute 
+###Deployment instructions
+
+Execute 
+
 ```
 > rails s
 ```
 to start the application.
-	
+
+
+### Application URLs
+
 Following are important URLs:
 
 
