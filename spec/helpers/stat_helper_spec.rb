@@ -21,12 +21,26 @@ RSpec.describe StatHelper, type: :helper do
 
   before(:each) do
 
-    mock_response = File.join(Rails.root, 'spec', 'webmock', 'slack_com_api_search_all.json')
-    mr = File.open(mock_response)
+    messages_response = File.open(File.join(Rails.root, 'spec/webmock/slack_com_api_search_all.json'))
+    users_response = File.open(File.join(Rails.root, 'spec/webmock/slack_com_api_users_list.json'))
+
 
     stub_request(:get, Regexp.new(Regexp.escape(Rails.configuration.x.slack_search_all_uri))).
         with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-        to_return(status: 200, body: mr, headers: {})
+        to_return(status: 200, body: messages_response, headers: {})
+
+    stub_request(:get, Regexp.new(Regexp.escape(Rails.configuration.x.slack_users_uri))).
+        with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(status: 200, body: users_response, headers: {})
+  end
+
+  describe "#fetch_users_from_slack" do
+    it "fetches list of users from Slack account" do
+
+      result = StatHelper::fetch_users_from_slack()
+
+      expect(result.count).to eq(40)
+    end
   end
 
   describe "#insert_users" do
@@ -49,8 +63,8 @@ RSpec.describe StatHelper, type: :helper do
   describe "#update_users_messages" do
     it "iterates through all stat records and updates the msg_count values" do
 
-      stat = Stat.create(name: "rspec.test.user1", msg_count: 10)
-      stat = Stat.create(name: "rspec.test.user2", msg_count: 10)
+      Stat.create(name: "rspec.test.user1", msg_count: 10)
+      Stat.create(name: "rspec.test.user2", msg_count: 10)
 
       StatHelper::update_users_messages()
 
