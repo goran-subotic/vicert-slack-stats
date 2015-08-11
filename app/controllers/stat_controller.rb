@@ -3,7 +3,9 @@ class StatController < ApplicationController
   def index
     #@stats = Stat.all
 
-    @stats_all_time = Stat.paginate(:page => params[:page], :per_page => 10).order("msg_count DESC")
+    per_page = params[:per_page] ? params[:per_page]:10
+
+    @stats_all_time = Stat.paginate(:page => params[:page], :per_page => per_page).order("msg_count DESC")
 
     #@stats_all_time = Stat.order("msg_count DESC").first(10)
 
