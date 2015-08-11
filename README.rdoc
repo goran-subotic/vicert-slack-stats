@@ -21,7 +21,7 @@ First, it is necessary to configure the Slack token by filling:
 In order to set up which job to be executed (Sidekiq or DejayedJob) and time of execution it is necessary to update /config/initializers/task_scheduler.rb file:
 
 Example where DelayedJob is active
-<tt>
+```ruby
  # It will execute the task every 55 min
  scheduler.every("55s") do
   Delayed::Job.enqueue SlackData::CollectSlackUsersJob.new("slack_users")
@@ -30,16 +30,16 @@ Example where DelayedJob is active
  scheduler.every("50s") do
    Delayed::Job.enqueue SlackData::CollectSlackMessagesJob.new("slack_messages")
  end
-</tt>
+```
 
 Example where Sidekiq is active:
-<tt>
- # It will execute task every 55 min
+```ruby
+# It will execute task every 55 min
 scheduler.every("55s") do
-  #SlackWorker.perform_async(:slack)
+  SlackWorker.perform_async(:slack)
 end
+```
 
-</tt>
 
 
 For DelayedJob worker to start, execute: <tt>rake jobs:work</tt> in console
