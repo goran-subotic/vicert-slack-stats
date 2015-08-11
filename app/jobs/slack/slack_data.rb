@@ -1,5 +1,7 @@
 module SlackData
   
+  #job for collecting users from Slack
+  #retrieves users from Slack and stores them into database
   CollectSlackUsersJob = Struct.new(:job_name) do
     
     def perform
@@ -27,6 +29,8 @@ module SlackData
      
   end
   
+  #job for collecting users messages from Slack
+  #retrieves messages for each users from Slack and then stores the number of messages into database
   CollectSlackMessagesJob = Struct.new(:job_name) do
     
     def perform
