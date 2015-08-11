@@ -46,11 +46,37 @@ RSpec.describe StatHelper, type: :helper do
      end
   end
 
-  describe "#fetch_messages_for_user" do
-    it "fetches collection of Slack messages for user" do
-      result = StatHelper::fetch_messages_for_user("rspec_test_user_1")
+  describe "#update_users_messages" do
+    it "iterates through all stat records and updates the msg_count values" do
 
-      expect(result).to_not be_nil
+      stat = Stat.create(name: "rspec.test.user1", msg_count: 10)
+      stat = Stat.create(name: "rspec.test.user2", msg_count: 10)
+
+      StatHelper::update_users_messages()
+
+      Stat.all.each do |stat|
+        expect(stat.msg_count).to eq(116)
+      end
+
+    end
+  end
+
+  describe "#fetch_messages_for_user" do
+    it "fetches collection of Slack messages for a user" do
+
+      result = StatHelper::fetch_messages_for_user("rspec_test_user_1")
+      expect(result).to eq(116)
+
+    end
+  end
+
+  describe "#update_messages" do
+    it "updates message count for a user" do
+
+      stat = Stat.create(name: "rspec.test.user", msg_count: 10)
+      StatHelper::update_messages("rspec.test.user", 50)
+      stat.reload()
+      expect(stat.msg_count).to eq(50)
 
     end
   end
